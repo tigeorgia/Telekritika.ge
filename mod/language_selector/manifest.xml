@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest>
+	<field key="author" value="ColdTrick IT Solutions" />
+	<field key="version" value="1.0.5" />
+	<field key="description" value="Language Selector" />
+	<field key="website" value="http://www.coldtrick.com/" />
+	<field key="copyright" value="(C) ColdTrick IT Solutions 2009" />
+	<field key="licence" value="GNU Public License version 2" />
+	<field key="elgg_version" value="2009030101" />
+</plugin_manifest>
+<!-- 
+
+Provides a language_selector view to use in your theme's.
+If you are using a default theme, there is an admin option to extend the header with the language selector
+Check the admin settings of the plugin for things to configure
+
+Features:
+	- language_selector/default view to use in theme's
+	- handles translation preferences for logged in (user preferences) AND non logged in users (cookies)
+	- incorporated autodetection of browser language (only for non logged in users)	
+		- this replaces the automagictranslation plugin and requires NO core hack
+		- http://community.elgg.org/pg/plugins/gabrielinux/read/99711/automagic_translation
+	- language selector display country codes or flags
+		- flags borrowed from translation browser plugin
+		- http://community.elgg.org/pg/plugins/mariuszekpl/read/49559/elgg-translation-browser-create-edit-translation-files-in-elgg-online
+
+Version History
+1.0.5:
+	- added: triggering an event when a loggedin user changes the language
+	
+1.0.4:
+	- fixed: secured action url for changing language (needed for Elgg 1.7)
+	
+1.0.3:
+	- added: flag for denmark (da)
+	- changed: flag for sweden (sv)
+	- fixed: cookie now set for correct path (/)
+	- fixed: issue with selecting languages for non logged in users (again)
+1.0.2:
+	- fixed: issue with selecting languages for non logged in users
+	- added: flag for zh (chinese) language
+1.0.1:
+	- added: flag for hebrew
+	- fixed: current language onclick action incorrect 
+	- fixed: dutch translations
+1.0:
+	- first release
+
+TODO: fixed order of languages (now it sometimes switches)
+-->

@@ -1,0 +1,51 @@
+RewriteEngine on
+
+# If Elgg is in a subdirectory on your site, you might need to add a RewriteBase line
+# containing the path from your site root to elgg's root. e.g. If your site is
+# http://example.com/ and Elgg is in http://example.com/sites/elgg/, you might need
+#
+#RewriteBase /sites/elgg/
+#
+# here, only without the # in front.
+#
+# If you're not running Elgg in a subdirectory on your site, but still getting lots
+# of 404 errors beyond the front page, you could instead try:
+#
+#RewriteBase /
+
+# First try at HTTPS redirect
+RewriteCond %{HTTP_HOST} ^www\.telekritika\.ge$
+RewriteRule ^(.*)$ https://telekritika.ge/$1 [R=301,L]
+RewriteCond   %{SERVER_PORT}  !^443$
+RewriteRule ^(.*)$ https://telekritika.ge/$1 [R=301,L]
+
+# In for backwards compatibility
+RewriteRule ^pg\/([A-Za-z0-9\_\-]+)$ engine/handlers/page_handler.php?handler=$1&%{QUERY_STRING}
+RewriteRule ^pg\/([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/page_handler.php?handler=$1&page=$2&%{QUERY_STRING}
+RewriteRule ^tag\/(.+)\/?$ engine/handlers/page_handler.php?handler=search&page=$1
+
+
+RewriteRule ^action\/([A-Za-z0-9\_\-\/]+)$ engine/handlers/action_handler.php?action=$1&%{QUERY_STRING}
+
+RewriteRule ^cache\/(.*)$ engine/handlers/cache_handler.php?request=$1&%{QUERY_STRING}
+
+RewriteRule ^services\/api\/([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/service_handler.php?handler=$1&request=$2&%{QUERY_STRING}
+
+RewriteRule ^export\/([A-Za-z]+)\/([0-9]+)\/?$ engine/handlers/export_handler.php?view=$1&guid=$2
+RewriteRule ^export\/([A-Za-z]+)\/([0-9]+)\/([A-Za-z]+)\/([A-Za-z0-9\_]+)\/$ engine/handlers/export_handler.php?view=$1&guid=$2&type=$3&idname=$4
+
+RewriteRule xml-rpc.php engine/handlers/xml-rpc_handler.php
+RewriteRule mt/mt-xmlrpc.cgi engine/handlers/xml-rpc_handler.php
+
+
+# rule for rewrite module test during install - can be removed after installation
+RewriteRule ^rewrite.php$ install.php
+
+# Everything else that isn't a file gets routed through the page handler
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([A-Za-z0-9\_\-]+)$ engine/handlers/page_handler.php?handler=$1 [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/page_handler.php?handler=$1&page=$2 [QSA]

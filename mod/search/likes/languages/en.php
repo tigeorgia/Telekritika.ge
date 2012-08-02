@@ -1,0 +1,78 @@
+<?php
+/**
+ * Likes English language file
+ */
+
+$english = array(
+    'likes:this' => 'liked this',
+    'likes:deleted' => 'Your like has been removed',
+    'likes:see' => 'See who liked this',
+    'likes:remove' => 'Unlike this',
+    'likes:notdeleted' => 'There was a problem removing your like',
+    'likes:likes' => 'You now like this item',
+    'likes:failure' => 'There was a problem liking this item',
+    'likes:alreadyliked' => 'You have already liked this item',
+    'likes:notfound' => 'The item you are trying to like cannot be found',
+    'likes:likethis' => 'Like this',
+    'likes:userlikedthis' => '%s like',
+    'likes:userslikedthis' => '%s likes',
+    'likes:river:annotate' => 'likes',
+
+    'river:likes' => 'likes %s %s',
+
+    // notifications. yikes.
+    'likes:notifications:subject' => '%s likes your post "%s"',
+    'likes:notifications:body' =>
+'Hi %1$s,
+
+%2$s likes your post "%3$s" on %4$s!
+
+See your original post here:
+
+%5$s
+
+or view %2$s\'s profile here:
+
+%6$s
+
+Thanks,
+%4$s
+',
+	'dislikes:this' => 'disliked this',
+	'dislikes:deleted' => 'Your dislike has been removed',
+	'dislikes:see' => 'See who disliked this',
+	'dislikes:remove' => 'Undislike this',
+	'dislikes:notdeleted' => 'There was a problem removing your dislike',
+	'dislikes:dislikes' => 'You now dislike this item',
+	'dislikes:failure' => 'There was a problem disliking this item',
+	'dislikes:alreadydisliked' => 'You have already disliked this item',
+	'dislikes:notfound' => 'The item you are trying to dislike cannot be found',
+	'dislikes:dislikethis' => 'Dislike this',
+	'dislikes:userdislikedthis' => '%s dislike',
+	'dislikes:usersdislikedthis' => '%s dislikes',
+	'dislikes:river:annotate' => 'dislikes',
+
+	'river:dislikes' => 'dislikes %s %s',
+
+	// notifications. yikes.
+	'dislikes:notifications:subject' => '%s dislikes your post "%s"',
+	'dislikes:notifications:body' =>
+'Hi %1$s,
+
+%2$s dislikes your post "%3$s" on %4$s!
+
+See your original post here:
+
+%5$s
+
+or view %2$s\'s profile here:
+
+%6$s
+
+Thanks,
+%4$s
+',
+	
+);
+
+add_translation('en', $english);

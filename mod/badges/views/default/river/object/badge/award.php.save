@@ -1,0 +1,24 @@
+<?php
+
+    global $CONFIG;
+
+	$performed_by = get_entity($vars['item']->subject_guid); // $statement->getSubject();
+
+	$object = get_entity($vars['item']->object_guid);
+	$badge_url = $object->badges_url;
+
+	$url_string = "{$CONFIG->wwwroot}action/badges/view?file_guid={$object->guid}";
+	$badgeURL = elgg_add_action_tokens_to_url($url_string);
+
+    if ($object->badges_url) {
+        $badge_view = "<a href=\"{$object->badges_url}\"><img title=\"{$object->title}\" src=\"$badgeURL\"></a>";
+    } else {
+        $badge_view = "<img title=\"{$object->title}\" src=\"$badgeURL\">";
+    }
+	
+	$url = "<a href=\"{$performed_by->getURL()}\">{$performed_by->name}</a>";
+	$string = sprintf(elgg_echo("badges:river:awarded"), $url, $badge_view) . ' ' . $object->badges_userpoints . ' ' . get_plugin_setting('lowerplural', 'userpoints');
+	
+?>
+
+<?php echo $string; ?>

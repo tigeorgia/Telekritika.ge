@@ -1,0 +1,19 @@
+TODO LIST:
+
+0.2
+- Integrate basic blogextended functionality
+- Introduce related articles options
+- Fix bugs for view_count
+- Ajaxed tabs
+- Make feature function admin controllable
+- More admin control over layout
+
+0.3
+- Redo the new post form for easier preview viewing
+- Introduce internal reblogging
+- Code cleanup to reduce plugin file size
+
+0.4
+- Cronify following notifications
+- Improve statistical counting
+- Introduce internal blog categories (admin backend)

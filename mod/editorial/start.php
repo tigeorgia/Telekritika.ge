@@ -1,0 +1,260 @@
+<?php
+/**
+ * Blogs
+ *
+ * @package Blog
+ *
+ * @todo
+ * - Either drop support for "publish date" or duplicate more entity getter
+ * functions to work with a non-standard time_created.
+ * - Pingbacks
+ * - Notifications
+ * - River entry for posts saved as drafts and later published
+ */
+
+elgg_register_event_handler('init', 'system', 'editorial_init');
+
+/**
+ * Init editorial plugin.
+ */
+function editorial_init() {
+
+	elgg_register_library('elgg:editorial', elgg_get_plugins_path() . 'editorial/lib/editorial.php');
+
+	// add a site navigation item
+	$item = new ElggMenuItem('editorial', elgg_echo('editorial:editorials'), 'editorial/all');
+	elgg_register_menu_item('site', $item);
+
+	elgg_register_event_handler('upgrade', 'upgrade', 'editorial_run_upgrades');
+
+	// add to the main css
+	elgg_extend_view('css/elgg', 'editorial/css');
+
+	// register the editorial's JavaScript
+	$editorial_js = elgg_get_simplecache_url('js', 'editorial/save_draft');
+	elgg_register_js('elgg.editorial', $editorial_js);
+
+	// routing of urls
+	elgg_register_page_handler('editorial', 'editorial_page_handler');
+
+	// override the default url to view a editorial object
+	elgg_register_entity_url_handler('object', 'editorial', 'editorial_url_handler');
+
+	// notifications
+	register_notification_object('object', 'editorial', elgg_echo('editorial:newpost'));
+	elgg_register_plugin_hook_handler('notify:entity:message', 'object', 'editorial_notify_message');
+
+	// add editorial link to
+	//elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'editorial_owner_block_menu');
+
+	// pingbacks
+	//elgg_register_event_handler('create', 'object', 'editorial_incoming_ping');
+	//elgg_register_plugin_hook_handler('pingback:object:subtypes', 'object', 'editorial_pingback_subtypes');
+
+	// Register for search.
+	elgg_register_entity_type('object', 'editorial');
+
+	// Add group option
+//    add_group_tool_option('editorial', elgg_echo('editorial:enableeditorial'), true);
+//    add_channel_tool_option('editorial', elgg_echo('editorial:enableeditorial'), false);
+//	elgg_extend_view('groups/tool_latest', 'editorial/group_module');
+
+	// add a editorial widget
+//	elgg_register_widget_type('editorial', elgg_echo('editorial'), elgg_echo('editorial:widget:description'), 'profile');
+
+	// register actions
+	$action_path = elgg_get_plugins_path() . 'editorial/actions/editorial';
+	elgg_register_action('editorial/save', "$action_path/save.php");
+	elgg_register_action('editorial/auto_save_revision', "$action_path/auto_save_revision.php");
+	elgg_register_action('editorial/delete', "$action_path/delete.php");
+
+	// entity menu
+	elgg_register_plugin_hook_handler('register', 'menu:entity', 'editorial_entity_menu_setup');
+
+	// ecml
+//	elgg_register_plugin_hook_handler('get_views', 'ecml', 'editorial_ecml_views_hook');
+}
+
+/**
+ * Dispatches editorial pages.
+ * URLs take the form of
+ *  All editorials:       editorial/all
+ *  User's editorials:    editorial/owner/<username>
+ *  Friends' editorial:   editorial/friends/<username>
+ *  User's archives: editorial/archives/<username>/<time_start>/<time_stop>
+ *  Blog post:       editorial/view/<guid>/<title>
+ *  New post:        editorial/add/<guid>
+ *  Edit post:       editorial/edit/<guid>/<revision>
+ *  Preview post:    editorial/preview/<guid>
+ *  Group editorial:      editorial/group/<guid>/all
+ *
+ * Title is ignored
+ *
+ * @todo no archives for all editorials or friends
+ *
+ * @param array $page
+ * @return NULL
+ */
+function editorial_page_handler($page) {
+
+	elgg_load_library('elgg:editorial');
+
+	// @todo remove the forwarder in 1.9
+	// forward to correct URL for bookmarks pre-1.7.5
+	editorial_url_forwarder($page);
+
+	// push all editorials breadcrumb
+	elgg_push_breadcrumb(elgg_echo('editorial:editorials'), "editorial/all");
+
+	if (!isset($page[0])) {
+		$page[0] = 'all';
+	}
+
+	$page_type = $page[0];
+	switch ($page_type) {
+		case 'owner':
+			$user = get_user_by_username($page[1]);
+			$params = editorial_get_page_content_list($user->guid);
+			break;
+		case 'friends':
+			$user = get_user_by_username($page[1]);
+			$params = editorial_get_page_content_friends($user->guid);
+			break;
+		case 'archive':
+			$user = get_user_by_username($page[1]);
+			$params = editorial_get_page_content_archive($user->guid, $page[2], $page[3]);
+			break;
+		case 'view':
+			$params = editorial_get_page_content_read($page[1]);
+			break;
+		case 'add':
+			gatekeeper();
+			$params = editorial_get_page_content_edit($page_type, $page[1]);
+			break;
+		case 'edit':
+			gatekeeper();
+			$params = editorial_get_page_content_edit($page_type, $page[1], $page[2]);
+			break;
+		case 'group':
+			$params = editorial_get_page_content_list($page[1]);
+			break;
+		case 'all':
+		default:
+			$title = elgg_echo('editorial:title:all_editorials');
+			$params = editorial_get_page_content_list();
+			break;
+	}
+
+	$params['sidebar'] .= elgg_view('editorial/sidebar', array('page' => $page_type));
+
+	$body = elgg_view_layout('content', $params);
+
+	echo elgg_view_page($params['title'], $body);
+}
+
+/**
+ * Format and return the URL for editorials.
+ *
+ * @param ElggObject $entity Blog object
+ * @return string URL of editorial.
+ */
+function editorial_url_handler($entity) {
+	if (!$entity->getOwnerEntity()) {
+		// default to a standard view if no owner.
+		return FALSE;
+	}
+
+	$friendly_title = elgg_get_friendly_title($entity->title);
+
+	return "editorial/view/{$entity->guid}/$friendly_ne";
+}
+
+/**
+ * Add a menu item to an ownerblock
+ */
+function editorial_owner_block_menu($hook, $type, $return, $params) {
+	if (elgg_instanceof($params['entity'], 'user')) {
+		$url = "editorial/owner/{$params['entity']->username}";
+		$item = new ElggMenuItem('editorial', elgg_echo('editorial'), $url);
+		$return[] = $item;
+	} else {
+		if ($params['entity']->editorial_enable != "no") {
+			$url = "editorial/group/{$params['entity']->guid}/all";
+			$item = new ElggMenuItem('editorial', elgg_echo('editorial:group'), $url);
+			$return[] = $item;
+		}
+	}
+
+	return $return;
+}
+
+/**
+ * Add particular editorial links/info to entity menu
+ */
+function editorial_entity_menu_setup($hook, $type, $return, $params) {
+	if (elgg_in_context('widgets')) {
+		return $return;
+	}
+
+	$entity = $params['entity'];
+	$handler = elgg_extract('handler', $params, false);
+	if ($handler != 'editorial') {
+		return $return;
+	}
+
+	if ($entity->canEdit() && $entity->status != 'published') {
+		$status_text = elgg_echo("editorial:status:{$entity->status}");
+		$options = array(
+			'name' => 'published_status',
+			'text' => "<span>$status_text</span>",
+			'href' => false,
+			'priority' => 150,
+		);
+		$return[] = ElggMenuItem::factory($options);
+	}
+
+	return $return;
+}
+
+/**
+ * Register editorials with ECML.
+ */
+function editorial_ecml_views_hook($hook, $entity_type, $return_value, $params) {
+	$return_value['object/editorial'] = elgg_echo('editorial:editorials');
+
+	return $return_value;
+}
+
+/**
+ * Upgrade from 1.7 to 1.8.
+ */
+function editorial_run_upgrades($event, $type, $details) {
+	$editorial_upgrade_version = get_plugin_setting('upgrade_version', 'editorials');
+
+	if (!$editorial_upgrade_version) {
+		 // When upgrading, check if the ElggBlog class has been registered as this
+		 // was added in Elgg 1.8
+		if (!update_subtype('object', 'editorial', 'ElggBlog')) {
+			add_subtype('object', 'editorial', 'ElggBlog');
+		}
+
+		// only run this on the first migration to 1.8
+		// add excerpt to all editorials that don't have it.
+		$ia = elgg_set_ignore_access(true);
+		$options = array(
+			'type' => 'object',
+			'subtype' => 'editorial'
+		);
+
+		$editorials = new ElggBatch('elgg_get_entities', $options);
+		foreach ($editorials as $editorial) {
+			if (!$editorial->excerpt) {
+				$editorial->excerpt = elgg_get_excerpt($editorial->description);
+			}
+		}
+
+		elgg_set_ignore_access($ia);
+
+		elgg_set_plugin_setting('upgrade_version', 1, 'editorials');
+	}
+}

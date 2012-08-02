@@ -1,0 +1,57 @@
+This plugin is part of the hypeJunction plugin bundle.
+
+Copyright (c) 2011  Ismayil Khayredinov
+Coypright (c) 2011  hypeJunction
+
+Distributed under GNU GPL v2 Lincense, unless otherwise stated within individual files of this plugin.
+
+============
+For more information, please visit www.hypeJunction.com
+Demo of hypeJunction plugins is available at www.hypeJunction.com
+============
+
+
+ABOUT HYPEJUNCTION
+------------------
+hypeJunction is here for you to connect, innovate, integrate, collaborate and indulge.
+hypeJunction is a bundle of plugins that will help you kick start your Elgg-based social network and spice it up with cool features and functionalities.
+
+hypeJunction is an attempt to create user-friendly plugins that require minimal knowledge of programming and web-site administration.
+With hypeJunction plugin bundle you can be set within hours to run a well-featured, stable and good-looking website.
+
+All plugins within hypeJunction plugin bundle require a hypeFramework plugin. 
+hypeFramework may be obtained at www.elgg.org or www.hypeJunction.com. 
+
+DONATIONS AND COMMERCIAL USE
+----------------------------
+I request you to kindly consider a donation to help maintain the demo servers and continue GPL development.
+Technical Support will only be available at commercial rates. I only respond to how-to questions and feature requests that come from the members of the hypeJunction Club (see below).
+
+If you run multiple sites and would like to benefit from GPL and premium plugins within hypeJunction, please consider joining the hypeJunction Membership Club.
+The fee for joining the Club is 250 Euro (annual renewal fee is 100 Euro).
+
+Club membership entitles you to:
+- Access all publicly released GPL, as well as non-public premium plugins within hypeJunction
+- Multi-site license for premium plugins
+- Regular updates and upgrades with bug-fixes, new features and new plugins
+- 2 hours of free technical support to help you set-up and customize the hypeJunction Bundle on your site
+- Discounted rates for paid technical support
+- Ability to request features and new plugins
+- Access to a how-to section and user manuals (to be set up)
+
+
+PHILOSOPHY
+----------
+In the last year of being an active member of Elgg community, I have noticed that many Elgg site owners are in need of plugins and features that are similar in nature. 
+It is my observation that most plugin within the Elgg community have a narrow approach, trying to solve only a certain aspect of the problem in point. This led me to believe that a new approach is required.
+With hypeJunction I hope to create a wide set of plugins that address a problem as a whole and can be used within any site despite site specifics and project requirements. The main distinction of hypeJunction plugins is that they are universal in nature, yet allow for easy project-specific customizations.
+
+hypeJunctions is also trying to address the problem of lacking funding within a GPL community, that Elgg is. Plugin development costs are rather high and not many can afford building a plugin from scratch. In hypeJunction Club, the cost is distributed amongs all members, thus making it interesting and affordable for them to acquire new features that would otherwise be inaccessible.
+
+
+
+To report bugs or issues:
+www.hypeJunction.com/trac
+
+To view demos:
+www.hypeJunction.com/demo

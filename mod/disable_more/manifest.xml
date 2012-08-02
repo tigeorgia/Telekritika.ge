@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>Disable More Menu</name>
+	<author>Purusothaman Ramanujam</author>
+	<version>1.8</version>
+	<description>Disables the "More" site menu.</description>
+	<category>service</category>
+	<category>bundled</category>
+	<website>http://www.iYaffle.com/</website>
+	<copyright>(C) Purusothaman Ramanujam</copyright>
+	<license>GNU Public License version 2</license>
+	<requires>
+		<type>elgg_version</type>
+		<version>2010040201</version>
+	</requires>
+</plugin_manifest>
