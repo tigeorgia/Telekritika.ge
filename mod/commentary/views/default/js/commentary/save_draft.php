@@ -493,7 +493,7 @@ callbacks.post_segmentrefresh = function (data){
     cv_hoverInit(parent.closest(".channelviewer_module"));
 
     var returned = parent.not(".moduleselected").find(".returned_segments").jScrollPane(jScrollDefaults).children(".jspContainer");
-    returned.mousemove(function(e){var me = jQuery(this); var off = e.pageY - me.offset().top; var percent = off / me.height(); me.parent().data("jsp").scrollToPercentY(percent);});
+    //returned.mousemove(function(e){var me = jQuery(this); var off = e.pageY - me.offset().top; var percent = off / me.height(); me.parent().data("jsp").scrollToPercentY(percent);});
     jQuery(".returned_segments > .jspContainer .jspDrag", parent).mousedown(function() {            
         isMouseDown = true;
         jQuery(".segmenthover").removeClass("segmenthover");
