@@ -107,3 +107,7 @@
 #ui-datepicker-div{
     display: none;
 }
+
+.hovermodule.cv-hovermodule.cv-hovermodule-segmentcomments{
+	left:40%!important;
+}
