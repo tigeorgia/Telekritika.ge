@@ -65,7 +65,7 @@ $release = get_version(true);
 	<?php echo elgg_view('js/initialize_elgg'); ?>
 </script>
 
-<script type="text/javascript" src="https://telekritika.ge/mod/telekritika/views/default/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://telekritika.ge/mod/telekritika/views/default/js/custom.js"></script>
 
 <?php
 echo $feedref;
