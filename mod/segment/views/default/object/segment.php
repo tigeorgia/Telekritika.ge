@@ -161,6 +161,7 @@ switch($switch){
             $html .= "</span>";
         }
         $html.="<span class=\"smallholder\">";
+		$html.="<span class=\"selecttext\"><img class=\"selecttextb\" src=\"https://telekritika.ge/_graphics/comments/highlight.png\" title=\"ტექსტის მონიშნვა კოპირებისთვის\" \"/></span>";
         $linkimg = elgg_normalize_url("_graphics/link.png");
         $html.="<span class=\"tinylink\" href=\"".$CONFIG->wwwroot."channels/".$segment->getGUID()."\"><img src=\"$linkimg\" /></span>";
         if(!empty($segment->videolink)){
