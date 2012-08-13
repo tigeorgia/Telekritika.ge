@@ -70,7 +70,7 @@ elgg.commentary.init = function() {
         var read = jQuery(".cv_read_module");
         if(read.length){
             var returned = read.jScrollPane(jScrollDefaults).children(".jspContainer");
-            returned.mousemove(function(e){var me = jQuery(this); var off = e.pageY - me.offset().top; var percent = off / me.height(); me.parent().data("jsp").scrollToPercentY(percent);});        
+            //returned.mousemove(function(e){var me = jQuery(this); var off = e.pageY - me.offset().top; var percent = off / me.height(); me.parent().data("jsp").scrollToPercentY(percent);});        
         }else{
             cv_refresh_width();        
         }
@@ -289,7 +289,7 @@ function cv_show_allModuleInit(module){
         parent.find(".selectasegment").addClass("showme");
 
         var returned = module.find(".returned_segments").jScrollPane(jScrollDefaults).children(".jspContainer");
-        returned.mousemove(function(e){var me = jQuery(this); var off = e.pageY - me.offset().top; var percent = off / me.height(); me.parent().data("jsp").scrollToPercentY(percent);});
+        //returned.mousemove(function(e){var me = jQuery(this); var off = e.pageY - me.offset().top; var percent = off / me.height(); me.parent().data("jsp").scrollToPercentY(percent);});
 
         jQuery(".returned_segments > .jspContainer .jspDrag", module).mousedown(function() {            
             isMouseDown = true;
