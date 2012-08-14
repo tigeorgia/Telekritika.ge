@@ -20,19 +20,24 @@ function expages_init() {
 	// add footer links
 //	expages_setup_footer_menu();
 
-    // add a footer navigation item
-    $item = new ElggMenuItem('about', 
-    elgg_echo('expages:about'), 
-    //'About',
-    'about');
-    elgg_register_menu_item('site', $item);
+	// add a site navigation item
+	elgg_register_menu_item('site', array(
+            'name' => 'faq',
+            'href' => 'faq',
+            'text' => elgg_echo('expages:faq'),
+            'priority' => 6,
+            'link_class' => 'faq-menu',
+        ));
+		
+	// add a site navigation item
+	elgg_register_menu_item('site', array(
+            'name' => 'about',
+            'href' => 'about',
+            'text' => elgg_echo('expages:about'),
+            'priority' => 7,
+            'link_class' => 'about-menu',
+        ));
 
-    // add a footer navigation item
-    $item = new ElggMenuItem('faq', 
-    elgg_echo('expages:faq'), 
-    //'About',
-    'faq');
-    elgg_register_menu_item('site', $item);
 
     // add a footer navigation item
     $item = new ElggMenuItem('terms', 
