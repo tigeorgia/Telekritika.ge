@@ -26,7 +26,7 @@ function article_init() {
             'name' => 'article',
             'href' => 'article/all',
             'text' => elgg_echo('article:articles'),
-            'priority' => 99,
+            'priority' => 2,
             'link_class' => 'article-articles-menu',
         ));
 
