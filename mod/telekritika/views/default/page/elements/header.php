@@ -202,7 +202,7 @@ function googleTranslateElementInit() {
 <div id="menubar">
 <?
 // insert site-wide navigation
-echo elgg_view_menu('site');
+echo elgg_view_menu('site', array('sort_by' => 'priority'));
 echo elgg_view('search/search_box');
 ?>
 </div>
