@@ -20,13 +20,26 @@ function commentary_init() {
 
 	elgg_register_library('elgg:commentary', elgg_get_plugins_path() . 'commentary/lib/commentary.php');
 
-    // add a site navigation item
-    $item = new ElggMenuItem('commentary', elgg_echo('commentary:commentaries'), 'channels');
-    elgg_register_menu_item('site', $item);
 
-    // add a site navigation item
-    $item = new ElggMenuItem('stories', elgg_echo('commentary:dailystorymenu'), 'stories');
-    elgg_register_menu_item('site', $item);
+	// add a site navigation item
+	elgg_register_menu_item('site', array(
+            'name' => 'stories',
+            'href' => 'stories',
+            'text' => elgg_echo('commentary:dailystorymenu'),
+            'priority' => 3,
+            'link_class' => 'stories-menu',
+        ));
+	
+	
+	// add a site navigation item
+	elgg_register_menu_item('site', array(
+            'name' => 'commentary',
+            'href' => 'channels',
+            'text' => elgg_echo('commentary:commentaries'),
+            'priority' => 4,
+            'link_class' => 'commentary-menu',
+        ));
+
 
 	// add to the main css
 	elgg_extend_view('css/elgg', 'commentary/css');
