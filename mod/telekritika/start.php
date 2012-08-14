@@ -229,7 +229,7 @@ $params['content']['side'][] = $addyourown;
             );                  
             $output = "<ul class=\"elgg-list\">";
             foreach($articles as $article){
-                $date = date("M j Y", $article->time_created);
+                $date = elgg_view_friendly_time($article->time_created);
                 $output .= "<li><a href=\"{$article->getURL()}\">$date - {$article->title}</a></li>";                                
             }
             $output .= "</ul>";        
@@ -237,7 +237,7 @@ $params['content']['side'][] = $addyourown;
             
                 elgg_view_module(
                     "articlearchive",
-                    elgg_echo("article:archive"),
+                    elgg_echo("<span class='elgg-echo-string' data-key='article:archive'>არქივი</span>"),
                     $output
                 ),
                 "class" => "toppest"
@@ -255,7 +255,7 @@ $params['content']['side'][] = $addyourown;
             );                  
             $output = "<ul class=\"elgg-list\">";
             foreach($articles as $article){
-                $date = date("M j Y", $article->time_created);
+                $date = elgg_view_friendly_time($article->time_created);
                 $output .= "<li><a href=\"{$article->getURL()}\">$date - {$article->title}</a></li>";                                
             }
             $output .= "</ul>";        
