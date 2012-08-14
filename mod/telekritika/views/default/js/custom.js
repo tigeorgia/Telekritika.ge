@@ -18,8 +18,8 @@ jQuery.fn.selText = function() {
 }
 
 $(function() {
-    $("img.selecttextb").click(function() {
+    $("span.selecttext").click(function() {
        //$(this).selText().addClass("selected");
-        $(this).parent().parent().prev().prev().selText().addClass("selectedsr");
+        $(this).parent().prev().prev().selText().addClass("selectedsr");
     });
 });
