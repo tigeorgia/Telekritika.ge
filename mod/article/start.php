@@ -22,8 +22,13 @@ function article_init() {
 	elgg_register_library('elgg:article', elgg_get_plugins_path() . 'article/lib/article.php');
 
 	// add a site navigation item
-	$item = new ElggMenuItem('article', elgg_echo('article:articles'), 'article/all');
-	elgg_register_menu_item('site', $item);
+	elgg_register_menu_item('site', array(
+            'name' => 'article',
+            'href' => 'article/all',
+            'text' => elgg_echo('article:articles'),
+            'priority' => 99,
+            'link_class' => 'article-articles-menu',
+        ));
 
 	elgg_register_event_handler('upgrade', 'upgrade', 'article_run_upgrades');
 
