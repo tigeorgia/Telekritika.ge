@@ -182,8 +182,9 @@
 
 .elgg-menu-site > li > a {
 	font-weight: bold;
-	padding: 3px 11px 0px 11px;
+	padding: 3px 9px 0px 9px;
 	height: 20px;
+	font-size: 12px;
 }
 
 .elgg-menu-site > li > a:hover {
