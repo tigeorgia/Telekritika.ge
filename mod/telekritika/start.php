@@ -353,8 +353,13 @@ function users_pagesetup_mod() {
     }
 
             // add a site navigation item
-        $item = new ElggMenuItem('critics', elgg_echo('topcritics'), 'critics');
-        elgg_register_menu_item('site', $item);
+		elgg_register_menu_item('site', array(
+            'name' => 'critics',
+            'href' => 'critics',
+            'text' => elgg_echo('topcritics'),
+            'priority' => 5,
+            'link_class' => 'critics-menu',
+        ));
 
     
 //      Set up the main menu
