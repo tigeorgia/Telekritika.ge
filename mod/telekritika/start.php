@@ -323,9 +323,10 @@ function users_pagesetup_mod() {
             'name' => 'profile',
             'href' =>  $user->getURL(),
             'text' => "<img src=\"$icon_url\" alt=\"$user->name\" title=\"$title\" class=\"$class\" />",
-            'priority' => 100,
+            'priority' => 1,
             'link_class' => 'elgg-topbar-avatar',
         ));
+    	
         
 
 
