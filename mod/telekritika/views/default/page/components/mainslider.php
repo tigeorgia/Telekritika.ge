@@ -424,7 +424,7 @@ ENDSLIDE;
         'normal_comments' => FALSE,
         'limit' => 1,
     );
-  
+ /* 
 //MOST POPULAR
     $options['order_by_metadata'] = array('name' => 'popularity', 'direction' => 'DESC', 'as' => 'integer');
     $options['badge'] = "popularityGold";
@@ -476,7 +476,7 @@ ENDSLIDE;
     }
     unset($options['annotation_names'], $options['badge']); 
 //MOST DISCUSSED
-    
+    */
 //FEATURED
     $moduletitle = elgg_echo("commentary:featured");
 
