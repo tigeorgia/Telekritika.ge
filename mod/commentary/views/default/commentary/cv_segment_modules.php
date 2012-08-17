@@ -59,6 +59,22 @@ for($y=0,$x=0,$count=count($page);$x<$count && $y < $CONFIG->maxChannelsInChanne
                     'subtype' => 'channel'
                 )
             );   
+    		
+			//Begin channel bar randomizer
+			$shufflecookie = $_SESSION["youruniqueid"];
+			
+			if (isset($_SESSION["youruniqueid"])) {
+			  $channels = unserialize(gzuncompress(base64_decode($shufflecookie)));
+			  }
+			 else{
+					shuffle($channels);
+					$channels_serialized = base64_encode(gzcompress(serialize($channels)));
+					$_SESSION["youruniqueid"] = $channels_serialized;
+			}
+			unset($shufflecookie);
+			unset($channels_serialized);
+			
+			//End channel bar randomizer
 
             foreach($channels as $key => $channel){
                 $options['guid'] = $channel->guid;    
