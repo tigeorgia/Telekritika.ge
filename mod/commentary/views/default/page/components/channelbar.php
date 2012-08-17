@@ -60,16 +60,18 @@ if ($position == 'before' || $position == 'both') {
             $vars['size'] = "medium";
 			
 			//Begin channel bar randomizer
-			$shufflecookie = $_COOKIE['shuffle'];
+			$shufflecookie = $_SESSION["PUTUNIQUEIDHERE"];
 			
-			if (isset($_COOKIE['shuffle'])) {
+			if (isset($_SESSION["PUTUNIQUEIDHERE"])) {
 			  $items = unserialize(gzuncompress(base64_decode($shufflecookie)));
 			  }
 			 else{
 					shuffle($items);
 					$items_serialized = base64_encode(gzcompress(serialize($items)));
-					setcookie("shuffle", $items_serialized, 0, "/");
+					$_SESSION["PUTUNIQUEIDHERE"] = $items_serialized;
 			}
+			unset($shufflecookie);
+			unset($items_serialized);
 			
 			//End channel bar randomizer
 			  
