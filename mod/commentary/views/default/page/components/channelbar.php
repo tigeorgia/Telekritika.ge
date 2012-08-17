@@ -58,6 +58,22 @@ if ($position == 'before' || $position == 'both') {
 	    <?php
         
             $vars['size'] = "medium";
+			
+			//Begin channel bar randomizer
+			$shufflecookie = $_COOKIE['shuffle'];
+			
+			if (isset($_COOKIE['shuffle'])) {
+			  $items = unserialize(gzuncompress(base64_decode($shufflecookie)));
+			  }
+			 else{
+					shuffle($items);
+					$items_serialized = base64_encode(gzcompress(serialize($items)));
+					setcookie("shuffle", $items_serialized, 0, "/");
+			}
+			
+			//End channel bar randomizer
+			  
+			  
         
 		    foreach ($items as $item) {
                 $vars['href'] = $vars['main'] ? $item->getURL() : "#";
