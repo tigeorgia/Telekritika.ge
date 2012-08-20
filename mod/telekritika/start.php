@@ -200,6 +200,7 @@ $addyourown['class'] = "tk-module small-padding";
 $visitFB = elgg_echo("FB:visitpage");
 $visitFBurl = $CONFIG->FBpageURL;
 $addyourown['body'] = <<<HTML
+<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FTelekritikage&amp;width=310&amp;height=590&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=true&amp;header=true&amp;appId=274173666024523" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:310px; height:590px;" allowTransparency="true"></iframe>
     <iframe style="padding:20px; height:100px; width:280px;" src="//www.facebook.com/plugins/like.php?href=https://www.facebook.com/pages/%E1%83%A2%E1%83%94%E1%83%9A%E1%83%94%E1%83%99%E1%83%A0%E1%83%98%E1%83%A2%E1%83%98%E1%83%99%E1%83%90-Telekritikage/454193961267056&show_faces=true&width=280&height=100&header=false&colorscheme=light&locale=ka_GE&send=false" scrolling="no" frameborder="0" allowTransparency="false"></iframe>
 <!--    <iframe style="padding:20px; height:100px;" src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Ftelekritika.ge&show_faces=false&width=258&height=100&header=false&colorscheme=light&locale=ka_GE&send=false" scrolling="no" frameborder="0" allowTransparency="false"></iframe> -->
 <!--    <iframe style="margin-top:-60px; width:310px; height:250px;" src="//www.facebook.com/plugins/activity.php?site=telekritika.ge&border_color=white&width=310&height=250&header=false&colorscheme=light&locale=ka_GE&send=false" scrolling="no" frameborder="0" allowTransparency="false"></iframe>
@@ -326,7 +327,7 @@ function users_pagesetup_mod() {
             'priority' => 1,
             'link_class' => 'elgg-topbar-avatar',
         ));
-    	
+		
         
 
 
