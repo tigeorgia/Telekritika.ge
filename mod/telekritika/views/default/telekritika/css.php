@@ -886,6 +886,11 @@ padding-top: 14px;
 .tk-module .elgg-head h3{
     display:none;
 }
+
+.elgg-river > li {
+border-bottom: 1px solid #CCC!important;
+}
+
 .elgg-list > li{
     border:0;
 }
