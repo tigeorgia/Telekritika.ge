@@ -200,6 +200,8 @@ $videolink_input = elgg_view('input/videolink', array(
 $title_label = elgg_echo('title');
 $title_input = elgg_view('input/text', array(
 	'name' => 'title',
+	'maxlength' => '40',
+	'placeholder' => 'Max 40 Characters',
 	'id' => 'segment_title',
 	'value' => $vars['title']
 ));
