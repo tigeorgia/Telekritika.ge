@@ -1197,6 +1197,14 @@ div.cvmodulefooter > a:hover,
     background-color: yellow;
 }
 
+.segtitle{
+	margin:7px 0
+}
+
+.selectedsegment .segdescription{
+	display:block!important;
+}
+
 .segments_wrapper a input{
     margin-left:4px;
         margin-top:8px;
