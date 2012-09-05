@@ -21,6 +21,16 @@ $owner = $segment->getOwnerEntity();
 //$categories = elgg_view('output/categories', $vars);
 //$channels = elgg_view('output/channels', $vars);
 //$excerpt = $segment->excerpt;
+$segdescription = $segment->description;
+$segtitle = $segment->title;
+if (empty($segtitle)) {
+	$segdescriptiontmp = mb_substr($segdescription, 0,40);
+    $segtitle = $segdescriptiontmp.="...";
+}
+if ($segtitle == "*") {
+	$segdescriptiontmp = mb_substr($segdescription, 0,40);
+    $segtitle = $segdescriptiontmp.="...";
+}
 
 //$owner_icon = elgg_view_entity_icon($owner, 'tiny');
 $owner_link = elgg_view('output/url', array(
@@ -84,6 +94,10 @@ $subtitle = "<p>$author_text $date $comments_link</p>";
 $subtitle .= $categories;
 $subtitle .= $channels;
 
+//if (empty($sequence{$segment->title}) {
+    //$segment->title = $segment->description;
+//}
+
 // do not show the metadata and controls in widget view
 if (elgg_in_context('widgets')) {
 	$metadata = '';
@@ -112,7 +126,7 @@ switch($switch){
         $dropdownselector = "#" . $dropdownid;
         $selectedsegment = ($vars['selectedsegment']->guid == $segment->guid) ? "selectedsegment" : "";
         $checked = "checked=\"checked\"";
-        $sequence = $vars['date'] && !$vars['bare'] ? elgg_echo("sequence:{$segment->sequence}") . " - " : "";
+        $sequence = $vars['date'] && !$vars['bare'] ? elgg_echo("sequence:{$segment->sequence}") . "" : "";
         //$videolink = ($link = $segment->videolink) ? "<a target=\"_blank\" class=\"cv_videolink\" href=\"$link\">".elgg_echo("watchthisnow")."</a>": "";
         $html.= "<a id=\"parent$random\" class=\"segment segment_$by $selectedsegment\" href=\"".$CONFIG->wwwroot."channels/".$segment->getGUID()."\" data-guid=\"{$segment->guid}\" data-dropdown=\"$dropdownselector\" >";
 
@@ -123,9 +137,11 @@ switch($switch){
         $html.=view_main_slide_meta(array("entity" => $segment));
 
         $html.="<input type=\"radio\" $checked/>";
-        $html.= "$sequence{$segment->title}";
         $html.="(".return_duration_in_time($segment->duration).")";
-        $html.= "<span class=\"segdescription\">{$segment->description}</span>";
+		$html.= "$sequence";
+		$html.= "<span class=\"segtitle\">{$segtitle}</span>";
+        $html.= "<span class=\"segdescription\" style=\"display:none;\">{$segdescription}</span>";
+		$html.= "<span class=\"segtagspar\">";
         if(!empty($segment->events) || !empty($segment->tags) || !empty($segment->universal_categories)){
             $html .= "<span class=\"segtags\">";
             if(!empty($segment->events)){
@@ -160,6 +176,7 @@ switch($switch){
             }
             $html .= "</span>";
         }
+		$html .= "</span>";
         $html.="<span class=\"smallholder\">";
 		$html.="<span class=\"selecttext\"><img class=\"selecttextb\" src=\"https://telekritika.ge/_graphics/comments/highlight.png\" title=\"ტექსტის მონიშნვა კოპირებისთვის\" \"/></span>";
         $linkimg = elgg_normalize_url("_graphics/link.png");
