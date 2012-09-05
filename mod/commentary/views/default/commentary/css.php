@@ -147,6 +147,10 @@ div.cv_content:hover{
     overflow: visible;
 }
 
+.returned_segments.jspScrollable .smallholder{
+	display:none;
+}
+
 .accordion {
     font-family: Verdana,Arial,sans-serif;
     font-size: 1.1em;
