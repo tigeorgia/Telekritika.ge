@@ -11,7 +11,7 @@ $subject = $item->getSubjectEntity();
 $object = $item->getObjectEntity();
 $target = $object->getContainerEntity();
 
-$subject_link = $subject->name;
+$subject_link = "<b>$subject->name</b>";
 
 $object_link = $object->title ? $object->title : $object->name;
 
