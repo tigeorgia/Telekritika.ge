@@ -1107,6 +1107,9 @@ You cannot reply to this email.",
 
 	'entity:delete:success' => 'Entity %s has been deleted',
 	'entity:delete:fail' => 'Entity %s could not be deleted',
+	'search_types:entities:segment' => 'Segment',
+	'search_types:entities:article' => 'Articles',
+	'search_types:entities:commentary' => 'Commentary',
 
 
 /**
