@@ -67,8 +67,16 @@ if (!$type_str) {
 	$type_str = elgg_echo('search:unknown_entity');
 }
 
+if(!empty($vars['params']['subtype'])) {
+	$search_type_str = elgg_echo("search_types:{$vars['params']['search_type']}:{$vars['params']['subtype']}");
+}
+
+else {
+	$search_type_str = elgg_echo("search_types:{$vars['params']['search_type']}");
+}
+
 // allow overrides for titles
-$search_type_str = elgg_echo("search_types:{$vars['params']['search_type']}");
+
 if (array_key_exists('search_type', $vars['params'])
 	&& $search_type_str != "search_types:{$vars['params']['search_type']}") {
 
