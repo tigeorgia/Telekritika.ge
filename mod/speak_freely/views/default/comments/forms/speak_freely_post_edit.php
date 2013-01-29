@@ -12,8 +12,8 @@ if (isset($vars['entity']) && !elgg_is_logged_in() && $vars['show_add_form'] !==
 	if($speakfreelyformcounter != 1){  //first time, create the form..
 		$speakfreelyformcounter = 1; // now this variable is set, so the form shouldn't replicate
 		
-//		require_once($CONFIG->pluginspath . 'speak_freely/lib/recaptchalib.php');
-//		$publickey = get_plugin_setting('public_key', 'speak_freely'); // you got this from the signup page
+		require_once($CONFIG->pluginspath . 'speak_freely/lib/recaptchalib.php');
+		$publickey = get_plugin_setting('public_key', 'speak_freely'); // you got this from the signup page
 
 //		$form_body = "<div class=\"contentWrapper\">";
 //		$form_body .= "<div>";
@@ -30,7 +30,7 @@ if (isset($vars['entity']) && !elgg_is_logged_in() && $vars['show_add_form'] !==
             );
         $form_body .= elgg_view('input/longtextnomce',array('placeholder' => elgg_echo('comments:yourcomment'), 'name' => 'generic_comment', 'value' => $_SESSION['speak_freely']['generic_comment']));
 
-/*        // if we have set recaptcha then display the output
+        // if we have set recaptcha then display the output
         if(get_plugin_setting('recaptcha','speak_freely') == "yes" && !$_SESSION['alreadydone']){
             $recaptcha_style = get_plugin_setting('recaptcha_style','speak_freely');
             if(empty($recaptcha_style)){
@@ -46,7 +46,7 @@ if (isset($vars['entity']) && !elgg_is_logged_in() && $vars['show_add_form'] !==
             $form_body .= recaptcha_get_html($publickey);
             $_SESSION['alreadydone'] = true;
         }
-*/                       
+                       
 //        $form_body .= "</div>";
 
 		// output the form
