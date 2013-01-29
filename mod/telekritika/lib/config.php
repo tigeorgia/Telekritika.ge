@@ -4,7 +4,7 @@
 global $CONFIG;
 
 //turn captcha on or off, comment out to turn on...  PS this doesnt fully activate the captcha you need to uncomment the captcha related javascript functions also!
-$CONFIG->captcha = "false";
+$CONFIG->captcha = "true";
 
 //turning this on records all missing translations and takes overhead!
 $CONFIG->translation_todo_shortcut = true;
