@@ -1,0 +1,35 @@
+/**
+ * Change Log
+ */
+ 
+/**
+ * @version 1.8-12.03.13
+ */
+- added portuguese language file (many thanks to Marcos Magoga)
+
+/**
+ * @version 1.8-11.12.12
+ */
+- put javascript at bottom
+
+/**
+ * @version 1.8-11.11.22
+ */
+- site id is awlays 1 [hardcoded] (fixed)
+ 
+/**
+ * @version 1.8-11.11.21
+ */
+- security and code clean up
+- added gpl header 
+- version number change from [yy].[mm].[dd] to [elgg-version]-[yy].[mm].[dd] 
+
+/**
+ * @version 11.11.16
+ */
+- moved some views (input/phloor_analytics_piwik/ -> phloor_analytics_piwik/input
+
+/**
+ * @version 11.11.11
+ */
+- Initial release
